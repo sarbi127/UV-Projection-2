@@ -24,6 +24,7 @@ namespace qbRT
 											 const std::vector<std::shared_ptr<qbRT::LightBase>> &lightList,
 											 const qbVector<double> &intPoint, const qbVector<double> &localNormal,
 											 const qbRT::Ray &cameraRay);
+
 																				
 		public:
 			qbVector<double> m_baseColor {std::vector<double> {1.0, 0.0, 1.0}};

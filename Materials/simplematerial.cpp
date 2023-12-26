@@ -11,19 +11,19 @@ qbRT::SimpleMaterial::~SimpleMaterial()
 }
 
 // Function to return the color.
-qbVector<double> qbRT::SimpleMaterial::ComputeColor(const std::vector<std::shared_ptr<qbRT::ObjectBase>> &objectList,
-											        const std::vector<std::shared_ptr<qbRT::LightBase>> &lightList,
-													const std::shared_ptr<qbRT::ObjectBase> &currentObject,
-													const qbVector<double> &intPoint, const qbVector<double> &localNormal,
-													const qbRT::Ray &cameraRay)
+qbVector<double> qbRT::SimpleMaterial::ComputeColor(	const std::vector<std::shared_ptr<qbRT::ObjectBase>> &objectList,
+																											const std::vector<std::shared_ptr<qbRT::LightBase>> &lightList,
+																											const std::shared_ptr<qbRT::ObjectBase> &currentObject,
+																											const qbVector<double> &intPoint, const qbVector<double> &localNormal,
+																											const qbRT::Ray &cameraRay)
 {
 	// Define the initial material colors.
 	qbVector<double> matColor	{3};
-	qbVector<double> refColor   {3};
+	qbVector<double> refColor {3};
 	qbVector<double> difColor	{3};
 	qbVector<double> spcColor	{3};
-
-	// Apply any normals maps that may have been assigned.
+	
+	// *** Apply any normals maps that may have been assigned.
 	qbVector<double> newNormal = localNormal;
 	if (m_hasNormalMap)
 	{
@@ -31,20 +31,18 @@ qbVector<double> qbRT::SimpleMaterial::ComputeColor(const std::vector<std::share
 		newNormal = PerturbNormal(newNormal, currentObject -> m_uvCoords, upVector);
 	}
 	
-	// Store the current local normal, in case it is needed elsewhere.
+	// *** Store the current local normal, in case it is needed elsewhere.
 	m_localNormal = newNormal;	
 	
 	/* Note the change of localNormal to newNormal wherever the normal is used
 		in the code below. */
 	
 	// Compute the diffuse component.
-    	if (!m_hasTexture)
-		    difColor = ComputeDiffuseColor(objectList, lightList, currentObject, intPoint, newNormal, m_baseColor);
-	    else
-	        //difColor = ComputeDiffuseColor(objectList, lightList, currentObject, intPoint, localNormal, m_textureList.at(0)->GetColor(currentObject->m_uvCoords));
-	        difColor = ComputeDiffuseColor(objectList, lightList, currentObject, intPoint, newNormal, GetTextureColor(currentObject->m_uvCoords));
-
-
+	if (!m_hasTexture)
+		difColor = ComputeDiffuseColor(objectList, lightList, currentObject, intPoint, newNormal, m_baseColor);
+	else
+		difColor = ComputeDiffuseColor(objectList, lightList, currentObject, intPoint, newNormal, GetTextureColor(currentObject->m_uvCoords));
+	
 	// Compute the reflection component.
 	if (m_reflectivity > 0.0)
 		refColor = ComputeReflectionColor(objectList, lightList, currentObject, intPoint, newNormal, cameraRay);
@@ -63,10 +61,10 @@ qbVector<double> qbRT::SimpleMaterial::ComputeColor(const std::vector<std::share
 }
 
 // Function to compute the specular highlights.
-qbVector<double> qbRT::SimpleMaterial::ComputeSpecular(const std::vector<std::shared_ptr<qbRT::ObjectBase>> &objectList,
-													   const std::vector<std::shared_ptr<qbRT::LightBase>> &lightList,
-													   const qbVector<double> &intPoint, const qbVector<double> &localNormal,
-													   const qbRT::Ray &cameraRay)
+qbVector<double> qbRT::SimpleMaterial::ComputeSpecular(	const std::vector<std::shared_ptr<qbRT::ObjectBase>> &objectList,
+																												const std::vector<std::shared_ptr<qbRT::LightBase>> &lightList,
+																												const qbVector<double> &intPoint, const qbVector<double> &localNormal,
+																												const qbRT::Ray &cameraRay)
 {
 	qbVector<double> spcColor	{3};
 	double red = 0.0;
@@ -90,13 +88,14 @@ qbVector<double> qbRT::SimpleMaterial::ComputeSpecular(const std::vector<std::sh
 		
 		/* Loop through all objects in the scene to check if any
 			obstruct light from this source. */
-		qbVector<double> poi				{3};
-		qbVector<double> poiNormal	{3};
-		qbVector<double> poiColor		{3};
+		//qbVector<double> poi				{3};
+		//qbVector<double> poiNormal	{3};
+		//qbVector<double> poiColor		{3};
+		qbRT::DATA::hitData hitData;
 		bool validInt = false;
 		for (auto sceneObject : objectList)
 		{
-			validInt = sceneObject -> TestIntersection(lightRay, poi, poiNormal, poiColor);
+			validInt = sceneObject -> TestIntersection(lightRay, hitData);
 			if (validInt)
 				break;
 		}
@@ -132,4 +131,3 @@ qbVector<double> qbRT::SimpleMaterial::ComputeSpecular(const std::vector<std::sh
 	spcColor.SetElement(2, blue);
 	return spcColor;
 }
-

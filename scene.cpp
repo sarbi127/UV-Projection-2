@@ -560,8 +560,7 @@ qbRT::Scene::Scene()
 											  qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
 											  qbVector<double>{std::vector<double>{16.0, 16.0, 1.0}}});
 	floor -> AssignMaterial(floorMaterial);
-	
-
+	floor -> m_uvMapType = qbRT::uvPLANE;
 
 	auto floor2 = std::make_shared<qbRT::ObjPlane> (qbRT::ObjPlane());
 	floor2 -> m_isVisible = true;
@@ -604,156 +603,19 @@ qbRT::Scene::Scene()
 	//imagePlane -> AssignMaterial(imageMaterial);
 	//imagePlane -> AssignMaterial(layeredMaterial);
 	imagePlane ->AssignMaterial(cloudMat);
-	
-	/*auto cylinder1 = std::make_shared<qbRT::Cylinder> (qbRT::Cylinder());
-	cylinder1 -> SetTransformMatrix(qbRT::GTform {qbVector<double>{std::vector<double>{-1.5, -2.0, 1.0}},
-												  qbVector<double>{std::vector<double>{0.0, -M_PI/2.0, 0.0}},
-												  qbVector<double>{std::vector<double>{0.25, 0.25, 1.0}}});
-	cylinder1 -> AssignMaterial(goldMetal);*/
-	
-	/*auto cylinder2 = std::make_shared<qbRT::Cylinder> (qbRT::Cylinder());
-	cylinder2 -> SetTransformMatrix(qbRT::GTform {qbVector<double>{std::vector<double>{-1.0, -2.0, 0.0}},
-												  qbVector<double>{std::vector<double>{0.0, M_PI/5.0, 0.0}},
-												  qbVector<double>{std::vector<double>{0.25, 0.25, 1.0}}});
-	cylinder2 -> AssignMaterial(redMetal);*/
-	
-	/*auto cone2 = std::make_shared<qbRT::Cone> (qbRT::Cone());
-	cone2 -> SetTransformMatrix(qbRT::GTform {qbVector<double>{std::vector<double>{0.0, -1.0, 0.0}},
-											  qbVector<double>{std::vector<double>{M_PI/4.0, 0.0, 0.0}},
-											  qbVector<double>{std::vector<double>{0.5, 0.5, 1.0}}});
-	cone2 -> AssignMaterial(goldMetal); */
 
 
     //*********************************************
     // Put the objects into the scene.
 	//*********************************************
 
-	//m_objectList.push_back(cone);
-	//m_objectList.push_back(leftSphere);
 	m_objectList.push_back(floor);
-	//m_objectList.push_back(floor2);
-	//m_objectList.push_back(leftWall);
-	//m_objectList.push_back(backWall);
-	//m_objectList.push_back(rightWall);
-	//m_objectList.push_back(cylinder1);
-	//m_objectList.push_back(cylinder2);
-	//m_objectList.push_back(cone2);
-	//m_objectList.push_back(imagePlane);
 	m_objectList.push_back(Sphere1);
 	m_objectList.push_back(Sphere2);
 	m_objectList.push_back(Sphere3);
 	m_objectList.push_back(Sphere11);
 	m_objectList.push_back(rightSphere1);
-	//m_objectList.push_back(rightSphere2);
 	m_objectList.push_back(box);
-	//m_objectList.push_back(torus_RM);
-	//m_objectList.push_back(Sphere_RM1);
-	//m_objectList.push_back(Sphere_RM2);
-	//m_objectList.push_back(Sphere_RM3);
-	//m_objectList.push_back(cube_RM);
-
-	// Construct a test sphere.
-	/*m_objectList.push_back(std::make_shared<qbRT::ObjSphere> (qbRT::ObjSphere()));
-	m_objectList.push_back(std::make_shared<qbRT::ObjSphere> (qbRT::ObjSphere()));
-	m_objectList.push_back(std::make_shared<qbRT::ObjSphere> (qbRT::ObjSphere()));
-	m_objectList.push_back(std::make_shared<qbRT::ObjSphere> (qbRT::ObjSphere()));
-	m_objectList.push_back(std::make_shared<qbRT::ObjSphere> (qbRT::ObjSphere()));*/
-
-    // Construct a test plane.
-	//m_objectList.push_back(std::make_shared<qbRT::ObjPlane> (qbRT::ObjPlane()));
-	//m_objectList.at(3) -> m_baseColor = qbVector<double>{std::vector<double> {0.5, 0.5, 0.5}};
-	//m_objectList.at(5) -> m_baseColor = qbVector<double>{std::vector<double> {0.5, 0.5, 0.5}};
-
-	// Define a transform for the plane.
-	/*qbRT::GTform planeMatrix;
-	planeMatrix.SetTransform(qbVector<double>{std::vector<double>{0.0, 0.0, 0.75}},
-							 qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
-							 qbVector<double>{std::vector<double>{4.0, 4.0, 1.0}});*/
-
-	//m_objectList.at(3) -> SetTransformMatrix(planeMatrix);
-	//m_objectList.at(5) -> SetTransformMatrix(planeMatrix);
-
-
-	// Modify the spheres.
-    /*qbRT::GTform testMatrix1, testMatrix2, testMatrix3, testMatrix4, testMatrix5;
-	testMatrix1.SetTransform(qbVector<double>{std::vector<double>{-2.0, 2.0, 0.0}}, //translate
-					         qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}}, //rotate
-					         qbVector<double>{std::vector<double>{0.5, 0.5, 0.65}}); //scale
-
-	testMatrix4.SetTransform(qbVector<double>{std::vector<double>{-1.75, 9.0, 0.0}}, 
-					         qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}}, 
-					         qbVector<double>{std::vector<double>{0.5, 0.5, 0.5}}); 
-
-
-    testMatrix2.SetTransform(qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
-					         qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
-					         qbVector<double>{std::vector<double>{0.5, 0.5, 0.5}});
-
-	testMatrix5.SetTransform(qbVector<double>{std::vector<double>{1.75, 9.0, 0.0}},
-					         qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
-					         qbVector<double>{std::vector<double>{0.5, 0.5, 0.5}});
-
-	
-	testMatrix3.SetTransform(qbVector<double>{std::vector<double>{2.25, 2.0, 0.0}}, //translate
-					         qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}}, //rotate
-					         qbVector<double>{std::vector<double>{0.65, 0.5, 0.5}}); //scale
-														
-	
-    m_objectList.at(0) -> SetTransformMatrix(testMatrix1);
-	m_objectList.at(1) -> SetTransformMatrix(testMatrix4);
-	m_objectList.at(2) -> SetTransformMatrix(testMatrix2);
-	m_objectList.at(3) -> SetTransformMatrix(testMatrix5);
-	m_objectList.at(4) -> SetTransformMatrix(testMatrix3);*/
-
-	//m_objectList.at(0) -> SetTransformMatrix(testMatrix1);
-	//m_objectList.at(1) -> SetTransformMatrix(testMatrix2);
-	//m_objectList.at(2) -> SetTransformMatrix(testMatrix3);
-
-    //m_objectList.at(0) -> m_baseColor = qbVector<double>{std::vector<double>{1.0, 1.0, 0.0}}; //Yellow
-	//m_objectList.at(1) -> m_baseColor = qbVector<double>{std::vector<double>{1.0, 0.0, 1.0}}; //Purple
-	//m_objectList.at(2) -> m_baseColor = qbVector<double>{std::vector<double>{0.0, 0.7, 1.0}}; //Aqua
-
-   
-	/*m_objectList.at(0) -> m_baseColor = qbVector<double>{std::vector<double>{1.0, 1.0, 0.0}}; //Yellow
-	m_objectList.at(1) -> m_baseColor = qbVector<double>{std::vector<double>{0.0, 1.0, 0.3}}; //Green
-	m_objectList.at(2) -> m_baseColor = qbVector<double>{std::vector<double>{1.0, 0.0, 0.0}}; //Red
-	m_objectList.at(3) -> m_baseColor = qbVector<double>{std::vector<double>{0.7, 0.2, 0.7}}; //Bright Purple
-	m_objectList.at(4) -> m_baseColor = qbVector<double>{std::vector<double>{0.0, 0.7, 1.0}}; //Aqua */
-
-	// Assign materials to objects.
-	/*m_objectList.at(0) -> AssignMaterial(testMaterial1);
-	m_objectList.at(1) -> AssignMaterial(testMaterial2);
-	m_objectList.at(2) -> AssignMaterial(testMaterial3);
-	m_objectList.at(3) -> AssignMaterial(testMaterial4);
-	m_objectList.at(4) -> AssignMaterial(testMaterial5);
-	m_objectList.at(5) -> AssignMaterial(floorMaterial);*/
-
-	// Construct a test light.
-	/*m_lightList.push_back(std::make_shared<qbRT::PointLight> (qbRT::PointLight()));
-	m_lightList.at(0) -> m_location = qbVector<double> {std::vector<double> {5.0, -10.0, -5.0}};
-	m_lightList.at(0) -> m_color = qbVector<double> {std::vector<double> {0.0, 0.0, 1.0}}; //blue
-
-	m_lightList.push_back(std::make_shared<qbRT::PointLight> (qbRT::PointLight()));
-	m_lightList.at(1) -> m_location = qbVector<double> {std::vector<double> {-5.0, -10.0, -5.0}}; 
-	m_lightList.at(1) -> m_color = qbVector<double> {std::vector<double> {1.0, 0.0, 0.0}}; //red
-	
-	m_lightList.push_back(std::make_shared<qbRT::PointLight> (qbRT::PointLight()));
-	m_lightList.at(2) -> m_location = qbVector<double> {std::vector<double> {0.0, -10.0, -5.0}};
-	m_lightList.at(2) -> m_color = qbVector<double> {std::vector<double> {0.0, 1.0, 0.0}}; //green */
- 
-    //******************************************
-    // Construct and setup the lights.
-	//******************************************
-
-    /*m_lightList.push_back(std::make_shared<qbRT::PointLight> (qbRT::PointLight()));
-	m_lightList.at(0) -> m_location = qbVector<double> {std::vector<double> {3.0, -10.0, -5.0}};
-	m_lightList.at(0) -> m_color = qbVector<double> {std::vector<double> {1.0, 1.0, 1.0}};
-	m_lightList.at(0) -> m_intensity = 4.0;
-	
-	m_lightList.push_back(std::make_shared<qbRT::PointLight> (qbRT::PointLight()));
-	m_lightList.at(1) -> m_location = qbVector<double> {std::vector<double> {0.0, -10.0, -5.0}};
-	m_lightList.at(1) -> m_color = qbVector<double> {std::vector<double> {1.0, 1.0, 1.0}};
-	m_lightList.at(1) -> m_intensity = 2.0; */
 
 	auto leftLight = std::make_shared<qbRT::PointLight> (qbRT::PointLight());
 	leftLight -> m_location = qbVector<double> {std::vector<double> {-8.0, -20.0, -10.0}};
@@ -773,8 +635,6 @@ qbRT::Scene::Scene()
 	m_lightList.push_back(leftLight);
 	m_lightList.push_back(rightLight);
 	//m_lightList.push_back(topLight);
-
-
 }
 
 // Function to perform the rendering.
@@ -813,74 +673,75 @@ bool qbRT::Scene::Render(qbImage &outputImage)
 			qbVector<double> closestIntPoint		{3};
 			qbVector<double> closestLocalNormal	{3};
 			qbVector<double> closestLocalColor	{3};
-			bool intersectionFound = CastRay(cameraRay, closestObject, closestIntPoint, closestLocalNormal, closestLocalColor);
+			qbRT::DATA::hitData closestHitData;
+			bool intersectionFound = CastRay(cameraRay, closestObject, closestHitData);
 			
 			/* Compute the illumination for the closest object, assuming that there
 				was a valid intersection. */
 			if (intersectionFound)
 			{
 				// Check if the object has a material.
-				if (closestObject -> m_hasMaterial)
+				if (closestHitData.hitObject -> m_hasMaterial)
 				{
 					// Use the material to compute the color.
 					qbRT::MaterialBase::m_reflectionRayCount = 0;
-					qbVector<double> color = closestObject -> m_pMaterial -> ComputeColor(m_objectList, m_lightList,closestObject, closestIntPoint,
-																						   closestLocalNormal, cameraRay);
+					qbVector<double> color = closestHitData.hitObject -> m_pMaterial -> ComputeColor(	m_objectList, m_lightList,
+																										closestHitData.hitObject, closestHitData.poi,
+																										closestHitData.normal, cameraRay);
 					outputImage.SetPixel(x, y, color.GetElement(0), color.GetElement(1), color.GetElement(2));
 				}
 				else
 				{
 					// Use the basic method to compute the color.
 					qbVector<double> matColor = qbRT::MaterialBase::ComputeDiffuseColor(m_objectList, m_lightList,
-																						closestObject, closestIntPoint,
-																						closestLocalNormal, closestObject->m_baseColor);
+																						closestHitData.hitObject, closestHitData.poi,
+																						closestHitData.normal, closestObject->m_baseColor);
+																						
 					outputImage.SetPixel(x, y, matColor.GetElement(0), matColor.GetElement(1), matColor.GetElement(2));
 				}
 			}
 		}
 	}
-
+	
 	std::cout << std::endl;
 	return true;
 }
 
 
-bool qbRT::Scene::CastRay(qbRT::Ray &castRay, std::shared_ptr<qbRT::ObjectBase> &closestObject,
-						  qbVector<double> &closestIntPoint, qbVector<double> &closestLocalNormal,
-						  qbVector<double> &closestLocalColor)
+// Function to cast a ray into the Scene_E21.
+bool qbRT::Scene::CastRay(	qbRT::Ray &castRay, std::shared_ptr<qbRT::ObjectBase> &closestObject,
+														qbRT::DATA::hitData &closestHitData)
 {
-    qbVector<double> intPoint		{3};
-	qbVector<double> localNormal	{3};
-	qbVector<double> localColor		{3};
+	qbRT::DATA::hitData hitData;
 	double minDist = 1e6;
 	bool intersectionFound = false;
 	for (auto currentObject : m_objectList)
 	{
-		bool validInt = currentObject -> TestIntersection(castRay, intPoint, localNormal, localColor);
-		
+		bool validInt = currentObject -> TestIntersection(castRay, hitData);
+
 		// If we have a valid intersection.
 		if (validInt)
 		{
 			// Set the flag to indicate that we found an intersection.
 			intersectionFound = true;
-					
+
 			// Compute the distance between the camera and the point of intersection.
-			double dist = (intPoint - castRay.m_point1).norm();
-					
+			double dist = (hitData.poi - castRay.m_point1).norm();
+
 			/* If this object is closer to the camera than any one that we have
 				seen before, then store a reference to it. */
 			if (dist < minDist)
 			{
 				minDist = dist;
 				closestObject = currentObject;
-				closestIntPoint = intPoint;
-				closestLocalNormal = localNormal;
-				closestLocalColor = localColor;
+				//closestIntPoint = intPoint;
+				//closestLocalNormal = localNormal;
+				//closestLocalColor = localColor;
+				closestHitData = hitData;
 			}
 		}
 	}
-	
-	return intersectionFound;
 
+	return intersectionFound;
 }
 			

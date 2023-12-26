@@ -18,11 +18,11 @@ bool CApp::OnInit()
     return false;
   }
 
- // int xSize = 1280;
-  //int ySize = 720;
+  int xSize = 1280;
+  int ySize = 720;
 
-  int xSize = 1260;
-  int ySize = 700;
+  //int xSize = 1260;
+  //int ySize = 700;
 
   //pWindow = SDL_CreateWindow("Ray Tracing", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
 

@@ -167,7 +167,7 @@ bool qbRT::Box::TestIntersection(const qbRT::Ray &castRay, qbRT::DATA::hitData &
 
 		// Compute and return the UV coordinates.
 		ComputeUV(poi, m_uvCoords);
-		hitData.uvCoords = m_uvCoords;
+		//hitData.uvCoords = m_uvCoords;
 		/* Instead of storing the UV coordinates in the member variable,
 			we now assign the result of ComputeUV directly to the 
 			hitData structure. */
@@ -176,7 +176,7 @@ bool qbRT::Box::TestIntersection(const qbRT::Ray &castRay, qbRT::DATA::hitData &
 		// Return a reference to this object.
 		//hitData.hitObject = this -> shared_from_this();
 		//hitData.hitObject = std::make_shared<qbRT::ObjectBase> (*this);
-		hitData.hitObject = this -> shared_from_this();
+		hitData.hitObject = std::make_shared<qbRT::ObjectBase> (*this);
 		
 		return true;
 	}

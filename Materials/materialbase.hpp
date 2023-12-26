@@ -40,10 +40,9 @@ namespace qbRT
 																										
 			// Function to cast a ray into the scene.
 			bool CastRay(const qbRT::Ray &castRay, const std::vector<std::shared_ptr<qbRT::ObjectBase>> &objectList,
-						 const std::shared_ptr<qbRT::ObjectBase> &thisObject,
-						 std::shared_ptr<qbRT::ObjectBase> &closestObject,
-						 qbVector<double> &closestIntPoint, qbVector<double> &closestLocalNormal,
-						 qbVector<double> &closestLocalColor);
+										const std::shared_ptr<qbRT::ObjectBase> &thisObject,
+										std::shared_ptr<qbRT::ObjectBase> &closestObject,
+										qbRT::DATA::hitData &closestHitData);
 
 
 			// Function to assign a texture.
@@ -85,6 +84,10 @@ namespace qbRT
 
 			// Store the material normal at the current point.
 			qbVector<double> m_localNormal;	
+
+			// Values for specular hightlights.
+			//double m_specular = 0.0;		
+			//double m_shininess = 0.0;	
 		
 		private:
 		

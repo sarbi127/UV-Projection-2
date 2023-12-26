@@ -21,7 +21,8 @@ namespace qbRT
 				
 				// Override the function to test for intersections.
 				//virtual bool TestIntersection(	const qbRT::Ray &castRay, qbRT::DATA::hitData &hitData) override;
-                virtual bool TestIntersection(const Ray &castRay, qbVector<double> &intPoint, qbVector<double> &localNormal, qbVector<double> &localColor) override;
+                //virtual bool TestIntersection(const Ray &castRay, qbVector<double> &intPoint, qbVector<double> &localNormal, qbVector<double> &localColor) override;
+				virtual bool TestIntersection(	const qbRT::Ray &castRay, qbRT::DATA::hitData &hitData) override;
 				
 				// Function to set the object function.
 				void SetObjectFcn( std::function<double(qbVector<double>*, qbVector<double>*)> objectFcn);
