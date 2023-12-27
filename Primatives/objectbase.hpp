@@ -35,6 +35,7 @@ namespace qbRT
 			// Function to test for intersections.
 			//virtual bool TestIntersection(const Ray &castRay, qbVector<double> &intPoint, qbVector<double> &localNormal, qbVector<double> &localColor);
 			virtual bool TestIntersection(const Ray &castRay, qbRT::DATA::hitData &hitData);
+			
 			// Function to set the transform matrix.
 			void SetTransformMatrix(const qbRT::GTform &transformMatrix);
 			qbRT::GTform GetTransformMatrix();
@@ -45,10 +46,14 @@ namespace qbRT
 			// Function to assign a material.
 			bool AssignMaterial(const std::shared_ptr<qbRT::MaterialBase> &objectMaterial);
 			
-			void ComputeUV(const qbVector<double> &localPOI, qbVector<double> &uvCoords);	
-
+			// Function to compute UV space.
+			void ComputeUV(const qbVector<double> &localPOI, qbVector<double> &uvCoords);			
+			
 		// Public member variables.
 		public:
+			// The user-defined tag for this object.
+			std::string m_tag;
+		
 			// The base colour of the object.
 			qbVector<double> m_baseColor {3};
 			
@@ -60,16 +65,15 @@ namespace qbRT
 			
 			// A flag to indicate whether this object has a material or not.
 			bool m_hasMaterial = false;
-
+			
 			// A flag to indicate whether this object is visible.
 			bool m_isVisible = true;
-            
+			
 			// Store the (u,v) coordinates from a detected intersection.
 			qbVector<double> m_uvCoords {2};
-
+			
 			// Control what type of UV mapping to apply to this object.
-			int m_uvMapType = qbRT::uvSPHERE;	
-
+			int m_uvMapType = qbRT::uvSPHERE;			
 	};
 }
 

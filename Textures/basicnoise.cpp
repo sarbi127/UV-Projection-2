@@ -59,6 +59,3 @@ void qbRT::Texture::BasicNoise::SetScale(int scale)
 	m_scale = scale;
 	m_noiseGenerator.SetupGrid(m_scale);
 }
-
-
-

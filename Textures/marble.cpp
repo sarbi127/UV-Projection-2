@@ -92,4 +92,3 @@ void qbRT::Texture::Marble::SetSine(double amplitude, double frequency)
 	m_sineAmplitude = amplitude;
 	m_sineFrequency = frequency;
 }
-

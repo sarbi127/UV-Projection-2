@@ -11,7 +11,7 @@ namespace qbRT
 		class Constant : public NormalBase
 		{
 			public:
-				
+				// Constructor / Destructor.
 				Constant();
 				virtual ~Constant() override;
 			

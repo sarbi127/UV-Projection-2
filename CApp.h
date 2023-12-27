@@ -7,8 +7,9 @@
 #include "camera.hpp"
 #include "./Textures/flat.hpp"
 #include "./Textures/checker.hpp"
+#include "./Textures/image.hpp"
 
-const int WIDTH = 1200, HEIGHT = 700;
+//const int WIDTH = 1200, HEIGHT = 700;
 
 class CApp
 {

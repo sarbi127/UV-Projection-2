@@ -12,7 +12,7 @@ namespace qbRT
 		class qbStone1 : public TextureBase
 		{
 			public:
-				
+				// Constructor / destructor.
 				qbStone1();
 				virtual ~qbStone1() override;
 				

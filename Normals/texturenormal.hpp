@@ -11,7 +11,7 @@ namespace qbRT
 		class TextureNormal : public NormalBase
 		{
 			public:
-				
+				// Constructor / Destructor.
 				TextureNormal();
 				virtual ~TextureNormal() override;
 			

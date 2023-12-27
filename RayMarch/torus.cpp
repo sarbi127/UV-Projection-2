@@ -13,8 +13,8 @@ qbRT::RM::Torus::Torus()
 
 	// Modify the bounding box.
 	m_boundingBox.SetTransformMatrix(qbRT::GTform { qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
-													qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
-													qbVector<double>{std::vector<double>{1.3, 1.3, 1.3}}});
+																									qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
+																									qbVector<double>{std::vector<double>{1.3, 1.3, 1.3}} } );
 }
 
 qbRT::RM::Torus::~Torus()
@@ -34,8 +34,8 @@ void qbRT::RM::Torus::SetRadii(double r1, double r2)
 void qbRT::RM::Torus::UpdateBounds()
 {
 	m_boundingBox.SetTransformMatrix(qbRT::GTform { qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
-													qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
-													qbVector<double>{std::vector<double>{m_r1+m_r2+0.3, m_r1+m_r2+0.3, m_r2 + 0.2}}});	
+																									qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
+																									qbVector<double>{std::vector<double>{m_r1+m_r2+0.3, m_r1+m_r2+0.3, m_r2 + 0.2}} } );	
 }
 
 // The private object function.

@@ -3,7 +3,7 @@
 // Constructor / destructor.
 qbRT::Texture::Flat::Flat()
 {
-	m_color = qbVector<double>{std::vector<double> {1.0, 0.0, 0.0, 1.0}}; //Red
+	m_color = qbVector<double>{std::vector<double> {1.0, 0.0, 0.0, 1.0}};
 }
 
 qbRT::Texture::Flat::~Flat()
@@ -22,5 +22,6 @@ void qbRT::Texture::Flat::SetColor(const qbVector<double> &inputColor)
 {
 	m_color = inputColor;
 }
+
 
 

@@ -3,13 +3,15 @@
 #include "texturebase.hpp"
 #include <cmath>
 
-
-qbRT::Texture::TextureBase::TextureBase(/* args */)
+// Constructor / destructor.
+qbRT::Texture::TextureBase::TextureBase()
 {
+
 }
 
 qbRT::Texture::TextureBase::~TextureBase()
 {
+
 }
 
 // Function to return the color at a given (U,V) location.
@@ -22,7 +24,7 @@ qbVector<double> qbRT::Texture::TextureBase::GetColor(const qbVector<double> &uv
 	return outputColor;
 }
 
-// Function to return the actual texture value at a given (u,v) location.
+// *** Function to return the actual texture value at a given (u,v) location.
 double qbRT::Texture::TextureBase::GetValue(const qbVector<double> &uvCoords)
 {
 	// Return a default value.
@@ -34,19 +36,19 @@ void qbRT::Texture::TextureBase::SetTransform(const qbVector<double> &translatio
 {
 	// Build the transform matrix.
 	qbMatrix2<double> rotationMatrix = {3, 3, std::vector<double> {
-										      cos(rotation), -sin(rotation), 0.0,
-										      sin(rotation), cos(rotation), 0.0,
-										      0.0, 0.0, 1.0}};
+																			cos(rotation), -sin(rotation), 0.0,
+																			sin(rotation), cos(rotation), 0.0,
+																			0.0, 0.0, 1.0}};
 																			
-	qbMatrix2<double> scaleMatrix = {3, 3, std::vector<double> {
-									       scale.GetElement(0), 0.0, 0.0,
-										   0.0, scale.GetElement(1), 0.0,
-										   0.0, 0.0, 1.0}};
+	qbMatrix2<double> scaleMatrix = {	3, 3, std::vector<double> {
+																		scale.GetElement(0), 0.0, 0.0,
+																		0.0, scale.GetElement(1), 0.0,
+																		0.0, 0.0, 1.0}};
 																		
-	qbMatrix2<double> translationMatrix = {3, 3, std::vector<double> {
-												 1.0, 0.0, translation.GetElement(0),
-											     0.0, 1.0, translation.GetElement(1),
-												 0.0, 0.0, 1.0}};
+	qbMatrix2<double> translationMatrix = {	3, 3, std::vector<double> {
+																					1.0, 0.0, translation.GetElement(0),
+																					0.0, 1.0, translation.GetElement(1),
+																					0.0, 0.0, 1.0}};
 																					
 	// And combine to form the final transform matrix.
 	m_transformMatrix = translationMatrix * rotationMatrix * scaleMatrix;
@@ -80,4 +82,3 @@ qbVector<double> qbRT::Texture::TextureBase::ApplyTransform(const qbVector<doubl
 	
 	return output;
 }
-

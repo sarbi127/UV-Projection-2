@@ -15,16 +15,15 @@ qbRT::PointLight::~PointLight()
 
 // Function to compute illumination.
 bool qbRT::PointLight::ComputeIllumination(	const qbVector<double> &intPoint, const qbVector<double> &localNormal,
-											const std::vector<std::shared_ptr<qbRT::ObjectBase>> &objectList,
-											const std::shared_ptr<qbRT::ObjectBase> &currentObject,
-											qbVector<double> &color, double &intensity)
+																						const std::vector<std::shared_ptr<qbRT::ObjectBase>> &objectList,
+																						const std::shared_ptr<qbRT::ObjectBase> &currentObject,
+																						qbVector<double> &color, double &intensity)
 {
 	// Construct a vector pointing from the intersection point to the light.
 	qbVector<double> lightDir = (m_location - intPoint).Normalized();
 	double lightDist = (m_location - intPoint).norm();
 	
 	// Compute a starting point.
-	//qbVector<double> startPoint = intPoint;
 	qbVector<double> startPoint = intPoint + (localNormal * 0.001);
 	
 	// Construct a ray from the point of intersection to the light.
@@ -32,15 +31,16 @@ bool qbRT::PointLight::ComputeIllumination(	const qbVector<double> &intPoint, co
 	
 	/* Check for intersections with all of the objects
 		in the scene, except for the current one. */
-	//qbVector<double> poi		{3};
+	//qbVector<double> poi				{3};
 	//qbVector<double> poiNormal	{3};
-	//qbVector<double> poiColor	{3};
+	//qbVector<double> poiColor		{3};
 	qbRT::DATA::hitData hitData;
 	bool validInt = false;
 	for (auto sceneObject : objectList)
 	{
 		if (sceneObject != currentObject)
 		{
+			//validInt = sceneObject -> TestIntersection(lightRay, poi, poiNormal, poiColor);
 			validInt = sceneObject -> TestIntersection(lightRay, hitData);
 			if (validInt)
 			{
@@ -64,9 +64,9 @@ bool qbRT::PointLight::ComputeIllumination(	const qbVector<double> &intPoint, co
 	{
 		// Compute the angle between the local normal and the light ray.
 		// Note that we assume that localNormal is a unit vector.
-		double angle = acos(qbVector<double>::dot(localNormal, lightDir)); // dot between light source and normal vector
+		double angle = acos(qbVector<double>::dot(localNormal, lightDir));
 		
-		// If the normal is pointing away from the light(pi/2), then we have no illumination.
+		// If the normal is pointing away from the light, then we have no illumination.
 		if (angle > 1.5708)
 		{
 			// No illumination.
@@ -88,7 +88,5 @@ bool qbRT::PointLight::ComputeIllumination(	const qbVector<double> &intPoint, co
 		color = m_color;
 		intensity = 0.0;
 		return false;
-	}	
-	
+	}
 }
-

@@ -114,10 +114,11 @@ bool qbRT::Texture::Image::LoadImage(std::string fileName)
 	return true;
 }
 
-
+// ************************************************************************
 // Function to return the value (RGBA) of a pixel in the image surface.
 // Note that the RGBA values are scaled to be between -1 and 1.
 // (0 to -1 for the z axis of the perturbation)
+// ************************************************************************
 void qbRT::Texture::Image::GetPixelValue(int x, int y, double &red, double &green, double &blue, double &alpha)
 {
 	if ((x >= 0) && (x < m_xSize) && (y >= 0) && (y < m_ySize))
@@ -158,8 +159,9 @@ void qbRT::Texture::Image::GetPixelValue(int x, int y, double &red, double &gree
 		blue = static_cast<double>(b);
 	}	
 }
-
+// ************************************************************************
 // Functions to handle interpolation.
+// ************************************************************************
 double qbRT::Texture::Image::LinearInterp(const double &x0, const double &y0, const double &x1, const double &y1, const double &x)
 {
 	double output;
@@ -183,5 +185,3 @@ double qbRT::Texture::Image::BilinearInterp(	const double &x0, const double &y0,
 	double p3 = LinearInterp(y0, p1, y2, p2, y);
 	return p3;
 }
-
-

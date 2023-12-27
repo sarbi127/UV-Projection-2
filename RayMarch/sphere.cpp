@@ -14,8 +14,8 @@ qbRT::RM::Sphere::Sphere()
 
 	// Modify the bounding box.
 	m_boundingBox.SetTransformMatrix(qbRT::GTform { qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
-													qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
-													qbVector<double>{std::vector<double>{1.2, 1.2, 1.2}} } );
+																									qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
+																									qbVector<double>{std::vector<double>{1.2, 1.2, 1.2}} } );
 
 }
 
@@ -32,4 +32,5 @@ double qbRT::RM::Sphere::ObjectFcn(qbVector<double> *location, qbVector<double> 
 	qbVector<double> intParms = std::vector<double>{1.0, 0.0, 0.0};
 	return qbRT::RM::SDF::Sphere(*location, center, intParms);
 }
+
 

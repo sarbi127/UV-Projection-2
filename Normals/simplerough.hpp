@@ -11,7 +11,7 @@ namespace qbRT
 		class SimpleRough : public NormalBase
 		{
 			public:
-				
+				// Constructor / Destructor.
 				SimpleRough();
 				virtual ~SimpleRough() override;
 			
@@ -21,7 +21,7 @@ namespace qbRT
 			public:
 				
 			private:
-				std::shared_ptr<std::mt19937> m_p_randGen;//randomNum
+				std::shared_ptr<std::mt19937> m_p_randGen;
 				
 		};
 	}

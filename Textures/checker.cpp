@@ -4,9 +4,6 @@
 // Constructor / destructor.
 qbRT::Texture::Checker::Checker()
 {
-	//m_color1 = qbVector<double>{std::vector<double>{1.0, 1.0, 1.0, 1.0}};
-	//m_color2 = qbVector<double>{std::vector<double>{0.2, 0.2, 0.2, 1.0}};
-     
 	qbRT::Texture::Flat color1;
 	qbRT::Texture::Flat color2;
 	
@@ -15,7 +12,6 @@ qbRT::Texture::Checker::Checker()
 	
 	m_p_color1 = std::make_shared<qbRT::Texture::Flat> (color1);
 	m_p_color2 = std::make_shared<qbRT::Texture::Flat> (color2);
-
 }
 
 qbRT::Texture::Checker::~Checker()
@@ -37,12 +33,10 @@ qbVector<double> qbRT::Texture::Checker::GetColor(const qbVector<double> &uvCoor
 	
 	if ((check % 2) == 0)
 	{
-		//localColor = m_color1;
 		localColor = m_p_color1 -> GetColor(uvCoords);
 	}
 	else
 	{
-		//localColor = m_color2;
 		localColor = m_p_color2 -> GetColor(uvCoords);
 	}
 	
@@ -67,5 +61,3 @@ void qbRT::Texture::Checker::SetColor(const std::shared_ptr<qbRT::Texture::Textu
 	m_p_color1 = inputColor1;
 	m_p_color2 = inputColor2;
 }
-
-

@@ -61,7 +61,7 @@ bool qbRT::ObjPlane::TestIntersection(	const qbRT::Ray &castRay, qbRT::DATA::hit
 				//m_uvCoords.SetElement(0, u);
 				//m_uvCoords.SetElement(1, v);
 				ComputeUV(poi, hitData.uvCoords);
-				//hitData.uvCoords = m_uvCoords;
+				hitData.uvCoords = m_uvCoords;
 				
 				// Return a reference to this object.
 				hitData.hitObject = std::make_shared<qbRT::ObjectBase> (*this);

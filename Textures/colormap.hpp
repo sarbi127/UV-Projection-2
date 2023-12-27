@@ -10,7 +10,7 @@ namespace qbRT
 		class ColorMap
 		{
 			public:
-				
+				// Constructor / destructor.
 				ColorMap();
 				~ColorMap();
 				

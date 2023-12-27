@@ -16,3 +16,4 @@ qbVector<double> qbRT::Normal::Constant::ComputePerturbation(const qbVector<doub
 	return PerturbNormal(normal, m_displacement);
 }
 
+

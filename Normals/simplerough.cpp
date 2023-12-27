@@ -1,6 +1,6 @@
 #include "simplerough.hpp"
 
-
+// Constructor / destructor.
 qbRT::Normal::SimpleRough::SimpleRough()
 {
 	std::random_device randDev;
@@ -27,4 +27,5 @@ qbVector<double> qbRT::Normal::SimpleRough::ComputePerturbation(const qbVector<d
 	qbVector<double> perturbation = std::vector<double> {x, y, z};
 	return PerturbNormal(normal, perturbation);
 }
+
 

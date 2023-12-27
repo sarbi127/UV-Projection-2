@@ -54,7 +54,7 @@ qbVector<double> qbRT::Texture::qbStone1::GetColor(const qbVector<double> &uvCoo
 		double mapPosition = 	m_noiseGenerator1.GetValue(newU, newV) * m_amplitude1 + 
 													m_noiseGenerator2.GetValue(newU, newV) * m_amplitude2;
 													
-		mapPosition = std::clamp((mapPosition - m_minValue) / (m_maxValue - m_minValue), 0.0, 1.0); //between 0 and 1.
+		mapPosition = std::clamp((mapPosition - m_minValue) / (m_maxValue - m_minValue), 0.0, 1.0);
 		localColor = m_colorMap -> GetColor(mapPosition);
 	}
 	
@@ -96,4 +96,3 @@ void qbRT::Texture::qbStone1::SetScale(int scale)
 	m_scale1 = scale;
 	m_noiseGenerator1.SetupGrid(m_scale1);
 }
-

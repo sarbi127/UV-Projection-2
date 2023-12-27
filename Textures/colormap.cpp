@@ -59,4 +59,3 @@ qbVector<double> qbRT::Texture::ColorMap::GetColor(double position)
 	double x1 = m_stopPositions.at(secondStop);
 	return m_stopValues.at(firstStop) + (x - x0) * ((m_stopValues.at(secondStop) - m_stopValues.at(firstStop)) * (1.0 / (x1 - x0)));
 }
-

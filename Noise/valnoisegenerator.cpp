@@ -15,10 +15,10 @@ qbRT::Noise::ValNoiseGenerator::~ValNoiseGenerator()
 
 }
 
-// Function to return the value at a given location. bilinear interpolation.
+// Function to return the value at a given location.
 double qbRT::Noise::ValNoiseGenerator::GetValue(double x, double y)
 {
-	// Ensure that x and y are cyclic.between o and 1.
+	// Ensure that x and y are cyclic.
 	x = fmod(x, 1.0);
 	y = fmod(y, 1.0);
 	
@@ -113,4 +113,3 @@ void qbRT::Noise::ValNoiseGenerator::SetupGrid(int scale)
 		}
 	}	
 }
-

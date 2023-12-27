@@ -1,5 +1,7 @@
 #include "texturenormal.hpp"
 
+#include "texturenormal.hpp"
+
 // Constructor / destructor.
 qbRT::Normal::TextureNormal::TextureNormal()
 {

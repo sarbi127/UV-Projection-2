@@ -2,12 +2,14 @@
 #include <cmath>
 #include <iostream>
 
+// Constructor function.
 qbRT::Noise::GrdNoiseGenerator::GrdNoiseGenerator()
 {
 	// Configure the default grid.
 	SetupGrid(2);
 }
 
+// Destructor.
 qbRT::Noise::GrdNoiseGenerator::~GrdNoiseGenerator()
 {
 
@@ -154,5 +156,3 @@ std::vector<double> qbRT::Noise::GrdNoiseGenerator::ComputeNormDisp(double x1, d
 	return std::vector<double> {xComp, yComp};
 		
 }
-
-

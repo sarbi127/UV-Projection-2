@@ -68,10 +68,8 @@ bool qbRT::RM::RayMarchBase::TestIntersection(	const qbRT::Ray &castRay, qbRT::D
 		
 			// Otherwise, we have a valid intersection at currentLoc.
 			// Transform the intersection point back into world coordinates.
-			//intPoint = m_transformMatrix.Apply(currentLoc, qbRT::FWDTFORM);
-			
 			hitData.poi = m_transformMatrix.Apply(currentLoc, qbRT::FWDTFORM);
-
+			
 			// Compute the local normal.
 			qbVector<double> surfaceNormal {3};
 
@@ -101,20 +99,20 @@ bool qbRT::RM::RayMarchBase::TestIntersection(	const qbRT::Ray &castRay, qbRT::D
 			// Transform the local normal.
 			surfaceNormal.Normalize();
 			hitData.normal = m_transformMatrix.ApplyNorm(surfaceNormal);
+			hitData.normal.Normalize();
 			
 			// Return the base color.
 			hitData.color = m_baseColor;
 			
 			// Return a pointer to this object.
-			//hitData.hitObject = std::make_shared<qbRT::ObjectBase> (*this);			
-			hitData.hitObject = std::make_shared<qbRT::ObjectBase> (*this);
+			hitData.hitObject = std::make_shared<qbRT::ObjectBase> (*this);			
 			
 			// Return the local point of intersection.
 			hitData.localPOI = currentLoc;			
 			
 			// Compute UV.		
 			ComputeUV(currentLoc, m_uvCoords);
-			hitData.uvCoords = m_uvCoords;					
+			hitData.uvCoords = m_uvCoords;				
 		
 			return true;
 		}

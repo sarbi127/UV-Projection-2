@@ -28,7 +28,7 @@ qbVector<double> qbRT::Normal::Image::ComputePerturbation(const qbVector<double>
 		double u = newLoc.GetElement(0);
 		double v = newLoc.GetElement(1);
 		
-		// Modulo arithmatic to account for possible tiling. bettwen -1 and 1.
+		// Modulo arithmatic to account for possible tiling.
 		u = fmod(u, 1.0);
 		v = fmod(v, 1.0);		
 		
@@ -37,10 +37,8 @@ qbVector<double> qbRT::Normal::Image::ComputePerturbation(const qbVector<double>
 		double ysd = static_cast<double>(m_ySize);
 		double xF = ((u + 1.0) / 2.0) * xsd;
 		double yF = ysd - (((v + 1.0) / 2.0) * ysd);
-        // particular point
 		int x = static_cast<int>(round(xF));
 		int y = static_cast<int>(round(yF));
-        // four corners around that particular point
 		int xMin = static_cast<int>(floor(xF));
 		int yMin = static_cast<int>(floor(yF));
 		int xMax = static_cast<int>(ceil(xF));
@@ -130,11 +128,11 @@ void qbRT::Normal::Image::GetPixelValue(int x, int y, double &red, double &green
 		// Assemble the final pixel value, according to the number of bytes per pixel.
 		switch (m_bytesPerPixel)
 		{
-			case 3://RGB
+			case 3:
 				currentPixel = byteValues.at(0) | (byteValues.at(1) << 8) | (byteValues.at(2) << 16);
 				break;
 				
-			case 4://RGBA
+			case 4:
 				currentPixel = byteValues.at(0) | (byteValues.at(1) << 8) | (byteValues.at(2) << 16) | (byteValues.at(3) << 24);
 				break;
 		}
@@ -144,9 +142,9 @@ void qbRT::Normal::Image::GetPixelValue(int x, int y, double &red, double &green
 		SDL_GetRGBA(currentPixel, m_imageSurface->format, &r, &g, &b, &a);
 			
 		// Return the color.		
-		red = static_cast<double>(r - 128) / 128.0; // x between -1 and 1.
-		green = static_cast<double>(g - 128) / 128.0; // y between -1 and 1.
-		blue = static_cast<double>(b) / 255.0; //z between 0 and 1.
+		red = static_cast<double>(r - 128) / 128.0;
+		green = static_cast<double>(g - 128) / 128.0;
+		blue = static_cast<double>(b) / 255.0;
 	}	
 }
 // ************************************************************************
@@ -165,14 +163,13 @@ double qbRT::Normal::Image::LinearInterp(const double &x0, const double &y0, con
 }
 
 double qbRT::Normal::Image::BilinearInterp(	const double &x0, const double &y0, const double &v0,
-											const double &x1, const double &y1, const double &v1,
-											const double &x2, const double &y2, const double &v2,
-											const double &x3, const double &y3, const double &v3,
-											const double &x, const double &y)
+																						const double &x1, const double &y1, const double &v1,
+																						const double &x2, const double &y2, const double &v2,
+																						const double &x3, const double &y3, const double &v3,
+																						const double &x, const double &y)
 {
 	double p1 = LinearInterp(x0, v0, x1, v1, x);
 	double p2 = LinearInterp(x2, v2, x3, v3, x);
 	double p3 = LinearInterp(y0, p1, y2, p2, y);
 	return p3;
 }
-

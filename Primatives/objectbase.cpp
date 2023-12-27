@@ -18,6 +18,7 @@ qbRT::ObjectBase::~ObjectBase()
 }
 
 // Function to test for intersections.
+//bool qbRT::ObjectBase::TestIntersection(const Ray &castRay, qbVector<double> &intPoint, qbVector<double> &localNormal, qbVector<double> &localColor)
 bool qbRT::ObjectBase::TestIntersection(const Ray &castRay, qbRT::DATA::hitData &hitData)
 {
 	return false;
@@ -25,7 +26,6 @@ bool qbRT::ObjectBase::TestIntersection(const Ray &castRay, qbRT::DATA::hitData 
 
 void qbRT::ObjectBase::SetTransformMatrix(const qbRT::GTform &transformMatrix)
 {
-
 	m_transformMatrix = transformMatrix;
 }
 
@@ -41,7 +41,6 @@ bool qbRT::ObjectBase::AssignMaterial(const std::shared_ptr<qbRT::MaterialBase> 
 	m_hasMaterial = true;
 	return m_hasMaterial;
 }
-
 
 // Function to test whether two floating-point numbers are close to being equal.
 bool qbRT::ObjectBase::CloseEnough(const double f1, const double f2)
@@ -156,10 +155,5 @@ void qbRT::ObjectBase::ComputeUV(const qbVector<double> &localPOI, qbVector<doub
 	// Apply the transform to the UV coordinates.
 	// *** TO BE IMPLEMENTED ***
 	//uvCoords = ApplyUVTransform(uvCoords);
+	
 }
-
-
-
-
-
-

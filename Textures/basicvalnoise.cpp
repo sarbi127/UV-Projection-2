@@ -28,7 +28,7 @@ qbVector<double> qbRT::Texture::BasicValNoise::GetColor(const qbVector<double> &
 		easily recognizable in the scene, indicating that something is wrong. */
 	if (!m_haveColorMap)
 	{
-		localColor = qbVector<double>{std::vector<double>{1.0, 0.0, 1.0, 1.0}};//purple
+		localColor = qbVector<double>{std::vector<double>{1.0, 0.0, 1.0, 1.0}};
 	}
 	else
 	{
@@ -59,4 +59,3 @@ void qbRT::Texture::BasicValNoise::SetScale(int scale)
 	m_scale = scale;
 	m_noiseGenerator.SetupGrid(m_scale);
 }
-

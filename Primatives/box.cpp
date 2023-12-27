@@ -167,7 +167,7 @@ bool qbRT::Box::TestIntersection(const qbRT::Ray &castRay, qbRT::DATA::hitData &
 
 		// Compute and return the UV coordinates.
 		ComputeUV(poi, m_uvCoords);
-		//hitData.uvCoords = m_uvCoords;
+		hitData.uvCoords = m_uvCoords;
 		/* Instead of storing the UV coordinates in the member variable,
 			we now assign the result of ComputeUV directly to the 
 			hitData structure. */
