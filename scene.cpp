@@ -151,14 +151,14 @@ qbRT::Scene::Scene()
 	sprayBodyMat -> AssignTexture(sprayTexture);
 	
 	auto metalMat = std::make_shared<qbRT::SimpleMaterial> (qbRT::SimpleMaterial());
-	metalMat -> m_baseColor = qbVector<double>{std::vector<double>{0.5, 0.5, 0.5}};
+	metalMat -> m_baseColor = qbVector<double>{std::vector<double>{0.3, 0.3, 0.3}};
 	metalMat -> m_reflectivity = 0.5;
 	metalMat -> m_shininess = 64.0;
 	
-	auto whitePlasticMat = std::make_shared<qbRT::SimpleMaterial> (qbRT::SimpleMaterial());
-	whitePlasticMat -> m_baseColor = qbVector<double>{std::vector<double>{1.0, 1.0, 1.0}};
-	whitePlasticMat -> m_reflectivity = 0.0;
-	whitePlasticMat -> m_shininess = 0.0;
+	auto plasticMat = std::make_shared<qbRT::SimpleMaterial> (qbRT::SimpleMaterial());
+	plasticMat -> m_baseColor = qbVector<double>{std::vector<double>{0.5, 0.5, 0.5}};
+	plasticMat -> m_reflectivity = 0.0;
+	plasticMat -> m_shininess = 0.0;
 	
 	auto mirrorMat = std::make_shared<qbRT::SimpleMaterial> (qbRT::SimpleMaterial());
 	mirrorMat -> m_baseColor = std::vector<double>{0.0, 0.0, 1.0};
@@ -215,13 +215,13 @@ qbRT::Scene::Scene()
 	sideWall -> AssignMaterial(mirrorMat2);
 	
 	double sprayX = 1.0;
-	double sprayY = -1.75;	
+	double sprayY = -1.5;	
 	auto sprayBody = std::make_shared<qbRT::Cylinder> (qbRT::Cylinder());
 	sprayBody -> m_tag = "sprayBody";
 	sprayBody -> m_isVisible = true;
 	sprayBody -> SetTransformMatrix(qbRT::GTform {	qbVector<double>{std::vector<double>{sprayX, sprayY, -0.5}},
-																									qbVector<double>{std::vector<double>{0.0, 0.0, M_PI/5.0}},
-																									qbVector<double>{std::vector<double>{0.4, 0.4, 1.0}}}	);
+													qbVector<double>{std::vector<double>{0.0, 0.0, M_PI/5.0}},
+													qbVector<double>{std::vector<double>{0.1, 0.1, 1.0}}}	);
 	sprayBody -> AssignMaterial(sprayBodyMat);
 	sprayBody -> m_uvMapType = qbRT::uvCYLINDER;
 	
@@ -229,50 +229,57 @@ qbRT::Scene::Scene()
 	sprayTopCone -> m_tag = "sprayTopCone";
 	sprayTopCone -> m_isVisible = true;
 	sprayTopCone -> SetTransformMatrix(qbRT::GTform {	qbVector<double>{std::vector<double>{sprayX, sprayY, -2.0}},
-																										qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
-																										qbVector<double>{std::vector<double>{0.4, 0.4, 0.5}}}	);
+														qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
+														qbVector<double>{std::vector<double>{0.03, 0.03, 0.12}}}	);
 	sprayTopCone -> AssignMaterial(metalMat);
 	
-	auto sprayTop = std::make_shared<qbRT::Cylinder> (qbRT::Cylinder());
+	auto sprayTop = std::make_shared<qbRT::Cone> (*sprayTopCone);
 	sprayTop -> m_tag = "sprayTop";
 	sprayTop -> m_isVisible = true;
-	sprayTop -> SetTransformMatrix(qbRT::GTform {	qbVector<double>{std::vector<double>{sprayX, sprayY, -1.5}},
-																								qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
-																								qbVector<double>{std::vector<double>{0.2, 0.2, 0.5}}}	);
-	sprayTop -> AssignMaterial(whitePlasticMat);
+	sprayTop -> SetTransformMatrix(qbRT::GTform {	qbVector<double>{std::vector<double>{sprayX, sprayY, -2.0}},
+												    qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
+													qbVector<double>{std::vector<double>{0.1, 0.1, 0.5}}}	);
+	sprayTop -> AssignMaterial(plasticMat);
 	
 	auto box = std::make_shared<qbRT::Box> (qbRT::Box());
 	box -> m_tag = "box";
 	box -> m_isVisible = true;
-	box -> SetTransformMatrix(qbRT::GTform {	qbVector<double>{std::vector<double>{-1.0, -2.0, 0.0}},
-																						qbVector<double>{std::vector<double>{0.0, 0.0, -M_PI/6.0}},
-																						qbVector<double>{std::vector<double>{0.5, 0.5, 0.5}}}	);
+	box -> SetTransformMatrix(qbRT::GTform {qbVector<double>{std::vector<double>{-1.0, -2.0, 0.1}},
+											qbVector<double>{std::vector<double>{0.0, 0.0, -M_PI/6.0}},
+											qbVector<double>{std::vector<double>{0.4, 0.4, 0.4}}}	);
 	box -> AssignMaterial(boxMat);
 	box -> m_uvMapType = qbRT::uvBOX;
 
 	auto box2 = std::make_shared<qbRT::Box> (*box);
-	box2 -> SetTransformMatrix(qbRT::GTform {	qbVector<double>{std::vector<double>{-1.0, -0.75, -0.25}},
-																						qbVector<double>{std::vector<double>{M_PI/4.0, 0.0, M_PI/2.0}},
-																						qbVector<double>{std::vector<double>{0.5, 0.5, 0.5}}}	);
+	//{-1.0, -0.75, -0.25}
+	box2 -> SetTransformMatrix(qbRT::GTform {qbVector<double>{std::vector<double>{-0.5, -1.1, 0.1}},
+										     qbVector<double>{std::vector<double>{0.0, 0.0, M_PI/3.0}},
+											 qbVector<double>{std::vector<double>{0.4, 0.4, 0.4}}}	);
+
+	auto box3 = std::make_shared<qbRT::Box> (*box);
+	box3 -> SetTransformMatrix(qbRT::GTform {qbVector<double>{std::vector<double>{-0.75, -1.5, -0.7}},
+										     qbVector<double>{std::vector<double>{0.0, 0.0, M_PI}},
+											 qbVector<double>{std::vector<double>{0.4, 0.4, 0.4}}}	);
 																						
 	auto torus = std::make_shared<qbRT::RM::Torus> (qbRT::RM::Torus());
 	torus -> m_tag = "torus";
 	torus -> m_isVisible = true;
 	torus -> SetRadii(0.7, 0.3);
-	torus -> SetTransformMatrix(qbRT::GTform {	qbVector<double>{std::vector<double>{2.5, -2.0, 0.2}},
-																							qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
-																							qbVector<double>{std::vector<double>{1.0, 1.0, 1.0}}}	);
+	torus -> SetTransformMatrix(qbRT::GTform {	qbVector<double>{std::vector<double>{2.5, -2.0, 0.3}},
+												qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
+												qbVector<double>{std::vector<double>{0.75, 0.75, 0.75}}}	);
 	torus -> AssignMaterial(woodMat);
 	torus -> m_uvMapType = qbRT::uvSPHERE;
 
 	// **************************************************************************************
 	// Put the objects into the scene.	
 	// **************************************************************************************
-	//m_objectList.push_back(sprayBody);
-	//m_objectList.push_back(sprayTopCone);
-	//m_objectList.push_back(sprayTop);
+	m_objectList.push_back(sprayBody);
+	m_objectList.push_back(sprayTopCone);
+	m_objectList.push_back(sprayTop);
 	m_objectList.push_back(box);
 	m_objectList.push_back(box2);	
+	m_objectList.push_back(box3);
 	m_objectList.push_back(floor);
 	m_objectList.push_back(backWall);
 	m_objectList.push_back(sideWall);
