@@ -67,8 +67,20 @@ qbRT::Scene::Scene()
 	// **************************************************************************************	
 	// The spay image texture.
 	auto sprayTexture = std::make_shared<qbRT::Texture::Image> (qbRT::Texture::Image());
-	sprayTexture -> LoadImage("bmp_13.bmp");
+	sprayTexture -> LoadImage("C:\git\bmp_13.bmp");
 	sprayTexture -> SetTransform(	qbVector<double>{std::vector<double>{0.0, 0.0}},
+																0.0,
+																qbVector<double>{std::vector<double>{1.0, 1.0}} );
+
+	auto sphereTexture = std::make_shared<qbRT::Texture::Image> (qbRT::Texture::Image());
+	sphereTexture -> LoadImage("C:\git\tennis_sph.bmp");
+	sphereTexture -> SetTransform(	qbVector<double>{std::vector<double>{0.0, 0.0}},
+																0.0,
+																qbVector<double>{std::vector<double>{1.0, 1.0}} );
+	
+	auto torusTexture = std::make_shared<qbRT::Texture::Image> (qbRT::Texture::Image());
+	torusTexture -> LoadImage("C:\git\4231186.bmp");
+	torusTexture -> SetTransform(	qbVector<double>{std::vector<double>{0.0, 0.0}},
 																0.0,
 																qbVector<double>{std::vector<double>{1.0, 1.0}} );
 						
@@ -149,6 +161,18 @@ qbRT::Scene::Scene()
 	sprayBodyMat -> m_reflectivity = 0.1;
 	sprayBodyMat -> m_shininess = 16.0;;
 	sprayBodyMat -> AssignTexture(sprayTexture);
+
+	auto sphereBodyMat = std::make_shared<qbRT::SimpleMaterial> (qbRT::SimpleMaterial());
+	sphereBodyMat -> m_baseColor = qbVector<double>{std::vector<double>{1.0, 1.0, 1.0}};
+	sphereBodyMat -> m_reflectivity = 0.1;
+	sphereBodyMat -> m_shininess = 16.0;;
+	sphereBodyMat -> AssignTexture(sphereTexture);
+
+	auto torusBodyMat = std::make_shared<qbRT::SimpleMaterial> (qbRT::SimpleMaterial());
+	torusBodyMat -> m_baseColor = qbVector<double>{std::vector<double>{1.0, 1.0, 1.0}};
+	torusBodyMat -> m_reflectivity = 0.1;
+	torusBodyMat -> m_shininess = 16.0;;
+	torusBodyMat -> AssignTexture(torusTexture);
 	
 	auto metalMat = std::make_shared<qbRT::SimpleMaterial> (qbRT::SimpleMaterial());
 	metalMat -> m_baseColor = qbVector<double>{std::vector<double>{0.3, 0.3, 0.3}};
@@ -156,7 +180,7 @@ qbRT::Scene::Scene()
 	metalMat -> m_shininess = 64.0;
 	
 	auto plasticMat = std::make_shared<qbRT::SimpleMaterial> (qbRT::SimpleMaterial());
-	plasticMat -> m_baseColor = qbVector<double>{std::vector<double>{0.5, 0.5, 0.5}};
+	plasticMat -> m_baseColor = qbVector<double>{std::vector<double>{0.75, 0.75, 0.75}};
 	plasticMat -> m_reflectivity = 0.0;
 	plasticMat -> m_shininess = 0.0;
 	
@@ -230,7 +254,7 @@ qbRT::Scene::Scene()
 	sprayTopCone -> m_isVisible = true;
 	sprayTopCone -> SetTransformMatrix(qbRT::GTform {	qbVector<double>{std::vector<double>{sprayX, sprayY, -2.0}},
 														qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
-														qbVector<double>{std::vector<double>{0.03, 0.03, 0.12}}}	);
+														qbVector<double>{std::vector<double>{0.03, 0.03, 0.11}}}	);
 	sprayTopCone -> AssignMaterial(metalMat);
 	
 	auto sprayTop = std::make_shared<qbRT::Cone> (*sprayTopCone);
@@ -251,24 +275,30 @@ qbRT::Scene::Scene()
 	box -> m_uvMapType = qbRT::uvBOX;
 
 	auto box2 = std::make_shared<qbRT::Box> (*box);
-	//{-1.0, -0.75, -0.25}
 	box2 -> SetTransformMatrix(qbRT::GTform {qbVector<double>{std::vector<double>{-0.5, -1.1, 0.1}},
 										     qbVector<double>{std::vector<double>{0.0, 0.0, M_PI/3.0}},
-											 qbVector<double>{std::vector<double>{0.4, 0.4, 0.4}}}	);
+											 qbVector<double>{std::vector<double>{0.4, 0.4, 0.4}}});
 
 	auto box3 = std::make_shared<qbRT::Box> (*box);
 	box3 -> SetTransformMatrix(qbRT::GTform {qbVector<double>{std::vector<double>{-0.75, -1.5, -0.7}},
 										     qbVector<double>{std::vector<double>{0.0, 0.0, M_PI}},
-											 qbVector<double>{std::vector<double>{0.4, 0.4, 0.4}}}	);
-																						
+											 qbVector<double>{std::vector<double>{0.4, 0.4, 0.4}}});
+
+    auto sphere = std::make_shared<qbRT::RM::Sphere> (qbRT::RM::Sphere());
+	sphere -> m_isVisible = true;
+	sphere -> SetTransformMatrix(qbRT::GTform {qbVector<double>{std::vector<double>{2.0, -1.0, -0.08}},
+											   qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
+											   qbVector<double>{std::vector<double>{0.75, 0.75, 0.75}}});
+	sphere -> AssignMaterial(sphereBodyMat);
+
 	auto torus = std::make_shared<qbRT::RM::Torus> (qbRT::RM::Torus());
 	torus -> m_tag = "torus";
 	torus -> m_isVisible = true;
 	torus -> SetRadii(0.7, 0.3);
-	torus -> SetTransformMatrix(qbRT::GTform {	qbVector<double>{std::vector<double>{2.5, -2.0, 0.3}},
+	torus -> SetTransformMatrix(qbRT::GTform {	qbVector<double>{std::vector<double>{2.0, -3.0, 0.3}},
 												qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
-												qbVector<double>{std::vector<double>{0.75, 0.75, 0.75}}}	);
-	torus -> AssignMaterial(woodMat);
+												qbVector<double>{std::vector<double>{0.75, 0.75, 0.75}}});
+	torus -> AssignMaterial(torusBodyMat);
 	torus -> m_uvMapType = qbRT::uvSPHERE;
 
 	// **************************************************************************************
@@ -280,6 +310,7 @@ qbRT::Scene::Scene()
 	m_objectList.push_back(box);
 	m_objectList.push_back(box2);	
 	m_objectList.push_back(box3);
+	m_objectList.push_back(sphere);
 	m_objectList.push_back(floor);
 	m_objectList.push_back(backWall);
 	m_objectList.push_back(sideWall);
