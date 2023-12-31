@@ -73,7 +73,7 @@ qbRT::Scene::Scene()
 																qbVector<double>{std::vector<double>{1.0, 1.0}} );
 
 	auto sphereTexture = std::make_shared<qbRT::Texture::Image> (qbRT::Texture::Image());
-	sphereTexture -> LoadImage("C:/git/pic-bmp/tennis_sph.bmp");
+	sphereTexture -> LoadImage("C:/git/pic-bmp/BasketballColor.bmp");
 	sphereTexture -> SetTransform(	qbVector<double>{std::vector<double>{0.0, 0.0}},
 																0.0,
 																qbVector<double>{std::vector<double>{1.0, 1.0}} );
@@ -152,7 +152,7 @@ qbRT::Scene::Scene()
 	// **************************************************************************************
 	auto floorMaterial = std::make_shared<qbRT::SimpleMaterial> (qbRT::SimpleMaterial());	
 	floorMaterial -> m_baseColor = qbVector<double>{std::vector<double>{1.0, 1.0, 1.0}};
-	floorMaterial -> m_reflectivity = 0.5;
+	floorMaterial -> m_reflectivity = 0.25;
 	floorMaterial -> m_shininess = 0.0;
 	floorMaterial -> AssignTexture(floorTexture);
 	
