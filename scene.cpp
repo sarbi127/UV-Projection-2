@@ -67,19 +67,19 @@ qbRT::Scene::Scene()
 	// **************************************************************************************	
 	// The spay image texture.
 	auto sprayTexture = std::make_shared<qbRT::Texture::Image> (qbRT::Texture::Image());
-	sprayTexture -> LoadImage("C:\git\bmp_13.bmp");
+	sprayTexture -> LoadImage("C:/git/pic-bmp/7593526.bmp");
 	sprayTexture -> SetTransform(	qbVector<double>{std::vector<double>{0.0, 0.0}},
 																0.0,
 																qbVector<double>{std::vector<double>{1.0, 1.0}} );
 
 	auto sphereTexture = std::make_shared<qbRT::Texture::Image> (qbRT::Texture::Image());
-	sphereTexture -> LoadImage("C:\git\tennis_sph.bmp");
+	sphereTexture -> LoadImage("C:/git/pic-bmp/tennis_sph.bmp");
 	sphereTexture -> SetTransform(	qbVector<double>{std::vector<double>{0.0, 0.0}},
 																0.0,
 																qbVector<double>{std::vector<double>{1.0, 1.0}} );
 	
 	auto torusTexture = std::make_shared<qbRT::Texture::Image> (qbRT::Texture::Image());
-	torusTexture -> LoadImage("C:\git\4231186.bmp");
+	torusTexture -> LoadImage("C:/git/pic-bmp/4231186.bmp");
 	torusTexture -> SetTransform(	qbVector<double>{std::vector<double>{0.0, 0.0}},
 																0.0,
 																qbVector<double>{std::vector<double>{1.0, 1.0}} );
@@ -152,7 +152,7 @@ qbRT::Scene::Scene()
 	// **************************************************************************************
 	auto floorMaterial = std::make_shared<qbRT::SimpleMaterial> (qbRT::SimpleMaterial());	
 	floorMaterial -> m_baseColor = qbVector<double>{std::vector<double>{1.0, 1.0, 1.0}};
-	floorMaterial -> m_reflectivity = 0.75;
+	floorMaterial -> m_reflectivity = 0.5;
 	floorMaterial -> m_shininess = 0.0;
 	floorMaterial -> AssignTexture(floorTexture);
 	
