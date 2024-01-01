@@ -240,30 +240,30 @@ qbRT::Scene::Scene()
 	
 	double sprayX = 1.0;
 	double sprayY = -1.5;	
-	auto sprayBody = std::make_shared<qbRT::Cylinder> (qbRT::Cylinder());
-	sprayBody -> m_tag = "sprayBody";
-	sprayBody -> m_isVisible = true;
-	sprayBody -> SetTransformMatrix(qbRT::GTform {	qbVector<double>{std::vector<double>{sprayX, sprayY, -0.5}},
+	auto penBody = std::make_shared<qbRT::Cylinder> (qbRT::Cylinder());
+	penBody -> m_tag = "penBody";
+	penBody -> m_isVisible = true;
+	penBody -> SetTransformMatrix(qbRT::GTform {	qbVector<double>{std::vector<double>{sprayX, sprayY, -0.5}},
 													qbVector<double>{std::vector<double>{0.0, 0.0, M_PI/5.0}},
 													qbVector<double>{std::vector<double>{0.1, 0.1, 1.0}}}	);
-	sprayBody -> AssignMaterial(sprayBodyMat);
-	sprayBody -> m_uvMapType = qbRT::uvCYLINDER;
+	penBody -> AssignMaterial(sprayBodyMat);
+	penBody -> m_uvMapType = qbRT::uvCYLINDER;
 	
-	auto sprayTopCone = std::make_shared<qbRT::Cone> (qbRT::Cone());
-	sprayTopCone -> m_tag = "sprayTopCone";
-	sprayTopCone -> m_isVisible = true;
-	sprayTopCone -> SetTransformMatrix(qbRT::GTform {	qbVector<double>{std::vector<double>{sprayX, sprayY, -2.0}},
+	auto penTopCone = std::make_shared<qbRT::Cone> (qbRT::Cone());
+	penTopCone -> m_tag = "penTopCone";
+	penTopCone -> m_isVisible = true;
+	penTopCone -> SetTransformMatrix(qbRT::GTform {	qbVector<double>{std::vector<double>{sprayX, sprayY, -2.0}},
 														qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
 														qbVector<double>{std::vector<double>{0.03, 0.03, 0.11}}}	);
-	sprayTopCone -> AssignMaterial(metalMat);
+	penTopCone -> AssignMaterial(metalMat);
 	
-	auto sprayTop = std::make_shared<qbRT::Cone> (*sprayTopCone);
-	sprayTop -> m_tag = "sprayTop";
-	sprayTop -> m_isVisible = true;
-	sprayTop -> SetTransformMatrix(qbRT::GTform {	qbVector<double>{std::vector<double>{sprayX, sprayY, -2.0}},
+	auto penTop = std::make_shared<qbRT::Cone> (*penTopCone);
+	penTop -> m_tag = "penTop";
+	penTop -> m_isVisible = true;
+	penTop -> SetTransformMatrix(qbRT::GTform {	qbVector<double>{std::vector<double>{sprayX, sprayY, -2.0}},
 												    qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
 													qbVector<double>{std::vector<double>{0.1, 0.1, 0.5}}}	);
-	sprayTop -> AssignMaterial(plasticMat);
+	penTop -> AssignMaterial(plasticMat);
 	
 	auto box = std::make_shared<qbRT::Box> (qbRT::Box());
 	box -> m_tag = "box";
@@ -284,37 +284,37 @@ qbRT::Scene::Scene()
 										     qbVector<double>{std::vector<double>{0.0, 0.0, M_PI}},
 											 qbVector<double>{std::vector<double>{0.4, 0.4, 0.4}}});
 
-    auto sphere = std::make_shared<qbRT::RM::Sphere> (qbRT::RM::Sphere());
-	sphere -> m_isVisible = true;
-	sphere -> SetTransformMatrix(qbRT::GTform {qbVector<double>{std::vector<double>{2.0, -1.0, -0.08}},
+    auto ball = std::make_shared<qbRT::RM::Sphere> (qbRT::RM::Sphere());
+	ball -> m_isVisible = true;
+	ball -> SetTransformMatrix(qbRT::GTform {qbVector<double>{std::vector<double>{2.0, -1.0, -0.08}},
 											   qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
 											   qbVector<double>{std::vector<double>{0.75, 0.75, 0.75}}});
-	sphere -> AssignMaterial(sphereBodyMat);
+	ball -> AssignMaterial(sphereBodyMat);
 
-	auto torus = std::make_shared<qbRT::RM::Torus> (qbRT::RM::Torus());
-	torus -> m_tag = "torus";
-	torus -> m_isVisible = true;
-	torus -> SetRadii(0.7, 0.3);
-	torus -> SetTransformMatrix(qbRT::GTform {	qbVector<double>{std::vector<double>{2.0, -3.0, 0.3}},
+	auto donut = std::make_shared<qbRT::RM::Torus> (qbRT::RM::Torus());
+	donut -> m_tag = "donut";
+	donut -> m_isVisible = true;
+	donut -> SetRadii(0.7, 0.3);
+	donut -> SetTransformMatrix(qbRT::GTform {	qbVector<double>{std::vector<double>{2.0, -3.0, 0.3}},
 												qbVector<double>{std::vector<double>{0.0, 0.0, 0.0}},
 												qbVector<double>{std::vector<double>{0.75, 0.75, 0.75}}});
-	torus -> AssignMaterial(torusBodyMat);
-	torus -> m_uvMapType = qbRT::uvSPHERE;
+	donut -> AssignMaterial(torusBodyMat);
+	donut -> m_uvMapType = qbRT::uvSPHERE;
 
 	// **************************************************************************************
 	// Put the objects into the scene.	
 	// **************************************************************************************
-	m_objectList.push_back(sprayBody);
-	m_objectList.push_back(sprayTopCone);
-	m_objectList.push_back(sprayTop);
+	m_objectList.push_back(penBody);
+	m_objectList.push_back(penTopCone);
+	m_objectList.push_back(penTop);
 	m_objectList.push_back(box);
 	m_objectList.push_back(box2);	
 	m_objectList.push_back(box3);
-	m_objectList.push_back(sphere);
+	m_objectList.push_back(ball);
 	m_objectList.push_back(floor);
 	m_objectList.push_back(backWall);
 	m_objectList.push_back(sideWall);
-	m_objectList.push_back(torus);
+	m_objectList.push_back(donut);
 	
 	// **************************************************************************************	
 	// Construct and setup the lights.
